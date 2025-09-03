@@ -1,0 +1,487 @@
+{
+  "appName": "Fashion ERP Suite",
+  "dataSource": "rest",
+  "roles": [
+    "admin",
+    "buyer",
+    "planner",
+    "store_manager",
+    "warehouse",
+    "analyst",
+    "guest"
+  ],
+  "defaultRole": "admin",
+  "modules": [
+    {
+      "id": "merch",
+      "label": "Merchandising",
+      "entities": [
+        {
+          "name": "styles",
+          "label": "Styles",
+          "fields": [
+            {
+              "name": "styleCode",
+              "label": "Style Code",
+              "type": "text",
+              "required": true
+            },
+            {
+              "name": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "name": "brand",
+              "label": "Brand",
+              "type": "text"
+            },
+            {
+              "name": "season",
+              "label": "Season",
+              "type": "text"
+            },
+            {
+              "name": "gender",
+              "label": "Gender",
+              "type": "select",
+              "options": [
+                "Women",
+                "Men",
+                "Kids",
+                "Unisex"
+              ]
+            },
+            {
+              "name": "defaultPrice",
+              "label": "Std Price",
+              "type": "currency"
+            },
+            {
+              "name": "cost",
+              "label": "Cost",
+              "type": "currency"
+            }
+          ]
+        },
+        {
+          "name": "skus",
+          "label": "SKUs",
+          "fields": [
+            {
+              "name": "styleId",
+              "label": "Style ID",
+              "type": "number",
+              "ref": "merch.styles"
+            },
+            {
+              "name": "styleCode",
+              "label": "Style Code",
+              "type": "text"
+            },
+            {
+              "name": "color",
+              "label": "Color",
+              "type": "text"
+            },
+            {
+              "name": "size",
+              "label": "Size",
+              "type": "text"
+            },
+            {
+              "name": "price",
+              "label": "Price",
+              "type": "currency"
+            },
+            {
+              "name": "cost",
+              "label": "Cost",
+              "type": "currency"
+            },
+            {
+              "name": "status",
+              "label": "Status",
+              "type": "select",
+              "options": [
+                "Active",
+                "Discontinued"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "vendors",
+          "label": "Vendors",
+          "fields": [
+            {
+              "name": "name",
+              "label": "Vendor Name",
+              "type": "text"
+            },
+            {
+              "name": "email",
+              "label": "Email",
+              "type": "email"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "proc",
+      "label": "Procurement",
+      "entities": [
+        {
+          "name": "purchaseOrders",
+          "label": "Purchase Orders",
+          "fields": [
+            {
+              "name": "poNo",
+              "label": "PO #",
+              "type": "text"
+            },
+            {
+              "name": "vendorId",
+              "label": "Vendor ID",
+              "type": "number",
+              "ref": "merch.vendors"
+            },
+            {
+              "name": "orderDate",
+              "label": "Order Date",
+              "type": "date"
+            },
+            {
+              "name": "status",
+              "label": "Status",
+              "type": "select",
+              "options": [
+                "Draft",
+                "Submitted",
+                "Approved",
+                "Received",
+                "Closed"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "poLines",
+          "label": "PO Lines",
+          "fields": [
+            {
+              "name": "poId",
+              "label": "PO ID",
+              "type": "number",
+              "ref": "proc.purchaseOrders"
+            },
+            {
+              "name": "skuId",
+              "label": "SKU ID",
+              "type": "number",
+              "ref": "merch.skus"
+            },
+            {
+              "name": "qty",
+              "label": "Qty",
+              "type": "number"
+            },
+            {
+              "name": "cost",
+              "label": "Cost",
+              "type": "currency"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inv",
+      "label": "Inventory",
+      "entities": [
+        {
+          "name": "warehouses",
+          "label": "Warehouses",
+          "fields": [
+            {
+              "name": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "name": "code",
+              "label": "Code",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "name": "stores",
+          "label": "Stores",
+          "fields": [
+            {
+              "name": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "name": "code",
+              "label": "Code",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "name": "stock",
+          "label": "Stock Ledger",
+          "fields": [
+            {
+              "name": "locType",
+              "label": "Loc Type",
+              "type": "select",
+              "options": [
+                "WH",
+                "STORE"
+              ]
+            },
+            {
+              "name": "locId",
+              "label": "Loc ID",
+              "type": "number"
+            },
+            {
+              "name": "skuId",
+              "label": "SKU ID",
+              "type": "number"
+            },
+            {
+              "name": "qty",
+              "label": "Qty",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "name": "transfers",
+          "label": "Transfers",
+          "fields": [
+            {
+              "name": "fromType",
+              "label": "From Type",
+              "type": "select",
+              "options": [
+                "WH",
+                "STORE"
+              ]
+            },
+            {
+              "name": "fromId",
+              "label": "From ID",
+              "type": "number"
+            },
+            {
+              "name": "toType",
+              "label": "To Type",
+              "type": "select",
+              "options": [
+                "WH",
+                "STORE"
+              ]
+            },
+            {
+              "name": "toId",
+              "label": "To ID",
+              "type": "number"
+            },
+            {
+              "name": "status",
+              "label": "Status",
+              "type": "select",
+              "options": [
+                "Draft",
+                "In Transit",
+                "Delivered"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "transferLines",
+          "label": "Transfer Lines",
+          "fields": [
+            {
+              "name": "transferId",
+              "label": "Transfer ID",
+              "type": "number",
+              "ref": "inv.transfers"
+            },
+            {
+              "name": "skuId",
+              "label": "SKU ID",
+              "type": "number",
+              "ref": "merch.skus"
+            },
+            {
+              "name": "qty",
+              "label": "Qty",
+              "type": "number"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sales",
+      "label": "Sales/OMS",
+      "entities": [
+        {
+          "name": "customers",
+          "label": "Customers",
+          "fields": [
+            {
+              "name": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "name": "email",
+              "label": "Email",
+              "type": "email"
+            }
+          ]
+        },
+        {
+          "name": "salesOrders",
+          "label": "Sales Orders",
+          "fields": [
+            {
+              "name": "soNo",
+              "label": "SO #",
+              "type": "text"
+            },
+            {
+              "name": "channel",
+              "label": "Channel",
+              "type": "select",
+              "options": [
+                "Store",
+                "Online",
+                "Marketplace"
+              ]
+            },
+            {
+              "name": "customer",
+              "label": "Customer",
+              "type": "text"
+            },
+            {
+              "name": "orderDate",
+              "label": "Order Date",
+              "type": "date"
+            },
+            {
+              "name": "status",
+              "label": "Status",
+              "type": "select",
+              "options": [
+                "New",
+                "Allocated",
+                "Shipped",
+                "Completed",
+                "Cancelled"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "soLines",
+          "label": "Sales Lines",
+          "fields": [
+            {
+              "name": "soId",
+              "label": "SO ID",
+              "type": "number",
+              "ref": "sales.salesOrders"
+            },
+            {
+              "name": "skuId",
+              "label": "SKU ID",
+              "type": "number",
+              "ref": "merch.skus"
+            },
+            {
+              "name": "qty",
+              "label": "Qty",
+              "type": "number"
+            },
+            {
+              "name": "price",
+              "label": "Price",
+              "type": "currency"
+            },
+            {
+              "name": "discount",
+              "label": "Discount",
+              "type": "number"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "navigation": [
+    {
+      "moduleId": "merch",
+      "entity": "styles"
+    },
+    {
+      "moduleId": "merch",
+      "entity": "skus"
+    },
+    {
+      "moduleId": "merch",
+      "entity": "vendors"
+    },
+    {
+      "moduleId": "proc",
+      "entity": "purchaseOrders"
+    },
+    {
+      "moduleId": "proc",
+      "entity": "poLines"
+    },
+    {
+      "moduleId": "inv",
+      "entity": "warehouses"
+    },
+    {
+      "moduleId": "inv",
+      "entity": "stores"
+    },
+    {
+      "moduleId": "inv",
+      "entity": "stock"
+    },
+    {
+      "moduleId": "inv",
+      "entity": "transfers"
+    },
+    {
+      "moduleId": "inv",
+      "entity": "transferLines"
+    },
+    {
+      "moduleId": "sales",
+      "entity": "customers"
+    },
+    {
+      "moduleId": "sales",
+      "entity": "salesOrders"
+    },
+    {
+      "moduleId": "sales",
+      "entity": "soLines"
+    }
+  ]
+}

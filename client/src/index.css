@@ -1,0 +1,68 @@
+/* client/src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------- Base tokens (CSS variables) -------- */
+@layer base {
+  :root{
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --muted: 210 40% 96.1%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+  }
+  :root.dark{
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 6%;
+    --muted: 217.2 32.6% 17.5%;
+  }
+
+  html, body, #root { height: 100%; }
+  body{
+    margin: 0;
+    /* NOTE: we DON'T use @apply bg-background here to avoid the error */
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+    min-height: 100vh;
+  }
+
+  ::selection { background: hsl(var(--primary) / 0.24); color: hsl(var(--primary-foreground)); }
+}
+
+/* -------- Custom utilities (Tailwind will now know these) -------- */
+@layer utilities {
+  .bg-background{ background-color: hsl(var(--background)); }
+  .text-foreground{ color: hsl(var(--foreground)); }
+  .bg-card{ background-color: hsl(var(--card)); }
+  .text-muted-foreground{ color: hsl(var(--foreground) / 0.6); }
+
+  /* keep Tailwind's .border behavior; add optional helper instead */
+  .erp-border { border: 1px solid hsl(0 0% 0% / 0.08); }
+  .dark .erp-border { border-color: hsl(0 0% 100% / 0.12); }
+
+  .btn-primary{
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border: 1px solid hsl(var(--primary) / 0.25);
+    padding: .5rem .75rem; border-radius: .75rem;
+  }
+  .btn-primary:hover{ filter: brightness(1.05); }
+
+  .btn-outline-primary{
+    color: hsl(var(--primary));
+    background-color: hsl(var(--primary) / 0.08);
+    border: 1px solid hsl(var(--primary) / 0.30);
+    padding: .5rem .75rem; border-radius: .75rem;
+  }
+  .btn-outline-primary:hover{ background-color: hsl(var(--primary) / 0.12); }
+
+  .nav-active{
+    background-color: hsl(var(--primary) / 0.10);
+    color: hsl(var(--primary));
+    border-color: hsl(var(--primary) / 0.30);
+  }
+}
