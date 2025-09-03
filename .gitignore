@@ -1,0 +1,17 @@
+# Node
+node_modules
+npm-debug.log*
+pnpm-lock.yaml
+yarn.lock
+
+# Build output
+client/dist
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Local env files
+*.env
+client/.env.local
+server/.env

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Fashion ERP Suite</title>
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme') || 'light';
+          if (t === 'dark') document.documentElement.classList.add('dark');
+          var p = localStorage.getItem('primary');
+          var pf = localStorage.getItem('primary-foreground');
+          if (p) document.documentElement.style.setProperty('--primary', p);
+          if (pf) document.documentElement.style.setProperty('--primary-foreground', pf);
+        } catch (e) {}
+      })();
+    </script>
+    <script type="module" crossorigin src="/<fashion-erp-suite>/assets/index-pcdLRCE1.js"></script>
+    <link rel="stylesheet" crossorigin href="/<fashion-erp-suite>/assets/index-Tkim9l1t.css">
+  </head>
+  <body class="bg-background text-foreground min-h-screen">
+    <div id="root"></div>
+    <!-- Use RELATIVE path so build doesn’t get confused -->
+  </body>
+</html>
